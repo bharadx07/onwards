@@ -2,7 +2,7 @@
  
 > Coming summer 2022 - By Bharadwaj Duggaraju.
 
-Send newsleters out quickly and easily. 
+Send newsleters out quickly and easily. **All current work is being done in the ```prototype``` folder.**
 
 ## How does it work
 * Create an account.
