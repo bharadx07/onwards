@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const _ = require("lodash");
 const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
+const fs = require("fs");
 
 dotenv.config();
 
@@ -30,10 +31,9 @@ app.get("/", (req, res) => {
 
 app.post("/upload-file", async (req, res) => {
   console.log(req.files);
+  console.log(req.body);
 
   const pic = req.files["files[]"];
-
-  pic.mv("./uploads/" + pic.name);
 
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
@@ -48,12 +48,14 @@ app.post("/upload-file", async (req, res) => {
     },
   });
 
-  transporter.sendMail({
-    subject: "test",
-    to: "~",
+  await transporter.sendMail({
+    subject: "newsletter",
+    to: req.body.sendemail.split(","),
     from: process.env.TEST_EMAIL_ADDRESS,
     html: `testing`,
+    attachments: [{ filename: pic.name, content: pic.data }],
   });
+
 });
 
 app.listen(8080, () => {

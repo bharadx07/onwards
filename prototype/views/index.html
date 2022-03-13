@@ -9,18 +9,22 @@
   <body>
     <form method="post" enctype="multipart/form-data">
       <input type="file" name="files[]" multiple />
+      <input type="text" name="send email" class="sendemail" />
       <input type="submit" value="Upload File" name="submit" />
     </form>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script type="module">
       const url = "/upload-file";
       const form = document.querySelector("form");
+      const sendEmail = document.querySelector(".sendemail");
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
 
         const files = document.querySelector("[type=file]").files;
         const formData = new FormData();
+
+        formData.append("sendemail", sendEmail.value);
 
         for (let i = 0; i < files.length; i++) {
           let file = files[i];
