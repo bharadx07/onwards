@@ -4,6 +4,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const _ = require("lodash");
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
 
@@ -30,6 +34,26 @@ app.post("/upload-file", async (req, res) => {
   const pic = req.files["files[]"];
 
   pic.mv("./uploads/" + pic.name);
+
+  const transporter = nodemailer.createTransport({
+    host: "smtp-mail.outlook.com",
+    secureConnection: false,
+    port: 587,
+    tls: {
+      ciphers: "SSLv3",
+    },
+    auth: {
+      user: process.env.TEST_EMAIL_ADDRESS,
+      pass: process.env.TEST_EMAIL_PASSWORD,
+    },
+  });
+
+  transporter.sendMail({
+    subject: "test",
+    to: "~",
+    from: process.env.TEST_EMAIL_ADDRESS,
+    html: `testing`,
+  });
 });
 
 app.listen(8080, () => {
