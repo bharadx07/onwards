@@ -9,7 +9,7 @@ const dotenv = require("dotenv");
 const fs = require("fs");
 const jsoning = require("jsoning")
 
-const db = require("db.json")
+const db = new jsoning("db.json")
 
 dotenv.config();
 
@@ -30,6 +30,18 @@ app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");
+});
+
+app.get("/dashboard", (req, res) => {
+  res.sendFile(__dirname + "/views/dashboard.html");
+});
+
+app.get("/login", (req, res) => {
+  res.sendFile(__dirname + "/views/login.html");
+});
+
+app.get("/register", (req, res) => {
+  res.sendFile(__dirname + "/views/register.html");
 });
 
 app.post("/upload-file", async (req, res) => {
