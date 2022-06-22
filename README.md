@@ -1,6 +1,6 @@
 # onwards
  
-> Coming summer 2022 - By Bharadwaj Duggaraju.
+> Coming soon - By Bharadwaj Duggaraju.
 
 Send newsleters out quickly and easily. **All current work is being done in the ```prototype``` folder.**
 
